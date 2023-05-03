@@ -1,4 +1,4 @@
-print("Hello Python!")
+print("Hello Python DJango!")
 
 a = 5 
 b = 4
