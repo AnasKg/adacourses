@@ -1,4 +1,4 @@
-print("Hello Python!")
+print("Hello Flask Celery!")
 
 a = 5 
 b = 4
