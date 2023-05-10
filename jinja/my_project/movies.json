@@ -1,0 +1,57 @@
+{
+    "1": {
+        "id": 1,
+        "title": "The Irony of Fate, or Enjoy Your Bath!",
+        "category": "Comedy",
+        "actors": [
+            "Andrei Myagkov",
+            "Barbara Brylska",
+            "Yuri Yakovlev"
+        ],
+        "link": "https://www.kinopoisk.ru/film/438/"
+    },
+    "2": {
+        "id": 2,
+        "title": "Brother",
+        "category": "Drama",
+        "actors": [
+            "Sergey Bodrov Jr.",
+            "Viktor Sukhorukov",
+            "Svetlana Pismichenko"
+        ],
+        "link": "https://www.kinopoisk.ru/film/58699/"
+    },
+    "3": {
+        "id": 3,
+        "title": "Stalker",
+        "category": "Sci-Fi",
+        "actors": [
+            "Alexander Kaidanovsky",
+            "Anatoly Solonitsyn",
+            "Alisa Freindlich"
+        ],
+        "link": "https://www.kinopoisk.ru/film/478/"
+    },
+    "4": {
+        "id": 4,
+        "title": "Come and See",
+        "category": "War",
+        "actors": [
+            "Aleksei Kravchenko",
+            "Olga Mironova",
+            "Liubomiras Laucevicius"
+        ],
+        "link": "https://www.kinopoisk.ru/film/42534/"
+    },
+    "5": {
+        "id": 5,
+        "title": "The Cranes Are Flying",
+        "category": "Drama",
+        "actors": [
+            "Tatiana Samoilova",
+            "Aleksei Batalov",
+            "Vasili Merkuryev"
+        ],
+        "link": "https://www.kinopoisk.ru/film/44034/"
+    }
+}
