@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit User</title>
+</head>
+<body>
+    <h1>Edit User</h1>
+    <form method="POST" action="/edit/{{ user.id }}">
+        <input type="text" name="username" value="{{ user.username }}" required><br>
+        <input type="password" name="password" value="{{ user.password }}" required><br>
+        <input type="submit" value="Save">
+    </form>
+</body>
+</html>

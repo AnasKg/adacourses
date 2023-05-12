@@ -1,18 +1,19 @@
 from jinja2 import Environment, FileSystemLoader
-from flask import Flask
+from flask import Flask, render_template
 import json
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
 
-environment = Environment(loader=FileSystemLoader(
-    '/Users/anas/Desktop/adacourses/jinja/my_project/templates/'))
+# environment = Environment(loader=FileSystemLoader(
+#     '/Users/anas/Desktop/adacourses/jinja/my_project/templates/'))
 
 
 @app.route('/')
 def index():
-    template = environment.get_template('index.html')
-    content = template.render(title='Сайт фильмов')
+    # template = environment.get_template('index.html')
+    # content = template.render(title='Сайт фильмов')
+    content = render_template('index.html', title='Сайт фильмов')
     return content
 
 @app.route('/movies/')

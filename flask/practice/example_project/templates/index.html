@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flask SQLAlchemy Example</title>
+</head>
+<body>
+    <h1>Welcome to the Flask SQLAlchemy Example</h1>
+    <p>Пользователи:</p>
+
+    {% for user in users %}
+
+    <div>{{ user.id }} {{ user.username }} <div>
+        {% endfor %}
+</body>
+</html>

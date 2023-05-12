@@ -1,74 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>{{ title }}</title>
+{% extends 'base.html' %}
 
-    <style>
-        .movie-card {
-    display: flex;
-    flex-wrap: wrap;
-    width: 300px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    overflow: hidden;
-    margin: 20px;
-}
+{% include 'header.html' %}
 
-.movie-poster {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-}
+{% block content %}
 
-.movie-info {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-.movie-title {
-    margin: 0;
-    font-size: 24px;
-    font-weight: 700;
-    color: #333;
-}
-
-.movie-summary {
-    margin: 10px 0;
-    font-size: 14px;
-    color: #666;
-}
-
-.movie-rating {
-    margin: 10px 0;
-    font-size: 16px;
-    color: #333;
-}
-
-.btn {
-    display: inline-block;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    color: #fff;
-    background-color: #007bff;
-    transition: background-color 0.2s ease-in-out;
-}
-
-.btn:hover {
-    background-color: #0062cc;
-}
-    </style>
-</head>
-<body>
     {% for movie in movies %}
     <div class="movie-card">
   <img src="https://www.film.ru/sites/default/files/styles/thumb_1024x450/public/trailers_frame/avengers-endgame-official-poster.jpg" alt="Movie Poster" class="movie-poster">
@@ -81,5 +16,4 @@
 </div>
 {% endfor %}
 
-</body>
-</html>
+{% endblock %}
