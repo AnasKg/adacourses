@@ -1,0 +1,17 @@
+{% extends 'posts/base.html' %}
+
+{% block content %}
+    <div class="container">
+        <a class="btn btn-secondary mb-3" href="{% url 'users_list' %}">&larr; Вернуться к списку пользователей</a>
+        <div class="card">
+            <div class="card-body">
+                <h1 class="card-title text-center">Детальная информация о пользователе</h1>
+                <h2 class="card-title">{{ user.first_name }} {{ user.last_name }}</h2>
+                <p class="card-text">Email: {{ user.email }}</p>
+                <p class="card-text">Дата регистрации: {{ user.date_joined }}</p>
+                <!-- Добавьте другую информацию о пользователе, если необходимо -->
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
