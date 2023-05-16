@@ -1,0 +1,17 @@
+<form method="POST" action="{% url 'create_post' %}">
+  {% csrf_token %}
+  <label for="title">Заголовок:</label>
+  <input type="text" id="title" name="title" required>
+  <br>
+  <label for="content">Содержание:</label>
+  <textarea id="content" name="content" required></textarea>
+  <br>
+  <label for="author">Автор:</label>
+  <select id="author" name="author" required>
+    {% for user in users %}
+      <option value="{{ user.id }}">{{ user.username }}</option>
+    {% endfor %}
+  </select>
+  <br>
+  <button type="submit">Создать</button>
+</form>
