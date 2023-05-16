@@ -1,0 +1,5 @@
+1) Создать модель Product с полями name, price, created_at
+2) Создать форму ProductForm
+3) Создать view для создания Product
+4) Создать view для просмотра списка Product
+4) Создать view для детального Product
