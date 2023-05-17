@@ -1,6 +1,7 @@
 <form method="POST" action="{% url 'create_post' %}">
   {% csrf_token %}
-  <label for="title">Заголовок:</label>
+  {{ form.as_p}}
+  {% comment %} <label for="title">Заголовок:</label>
   <input type="text" id="title" name="title" required>
   <br>
   <label for="content">Содержание:</label>
@@ -12,6 +13,6 @@
       <option value="{{ user.id }}">{{ user.username }}</option>
     {% endfor %}
   </select>
-  <br>
+  <br> {% endcomment %}
   <button type="submit">Создать</button>
 </form>

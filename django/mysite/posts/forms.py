@@ -12,3 +12,13 @@ class PostForm(forms.Form):
     title = forms.CharField(max_length=255)
     content = forms.CharField()
     author = forms.ModelChoiceField(queryset=User.objects.all())
+
+class ProductForm(forms.Form):
+    name = forms.CharField(max_length=255)
+    price = forms.IntegerField()
+
+
+class CommentForm(forms.Form):
+    content = forms.CharField(max_length=255)
+    author = forms.ModelChoiceField(queryset=User.objects.all())
+

@@ -1,8 +1,8 @@
-from django.shortcuts import render, HttpResponse, get_object_or_404
+from django.shortcuts import render, HttpResponse, get_object_or_404, redirect
 from django.http import Http404
-from .models import Post, Comment
+from .models import Post, Comment, Product
 from django.contrib.auth.models import User
-from .forms import MyForm, PostForm
+from .forms import MyForm, PostForm, ProductForm, CommentForm
 
 # Create your views here.
 
@@ -19,7 +19,22 @@ def post_list(request):
 def post_detail(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     comments = Comment.objects.filter(post=post)
-    context = {'post': post, 'comments': comments}
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            content = form.cleaned_data['content']
+            author = form.cleaned_data['author']
+            Comment.objects.create(
+                post=post,
+                content=content,
+                author=author
+            )
+            return redirect('post_detail', post_id=post_id)
+    else:
+        form = CommentForm()
+    
+     
+    context = {'post': post, 'comments': comments, 'form':form}
 
     return render(request, 'posts/post_detail.html', context=context)
 
@@ -67,3 +82,40 @@ def create_post(request):
         form = PostForm()
 
     return render(request, 'posts/create_post.html',{'form':form})
+
+
+def see_product(request):
+    if request.method == 'GET':
+        prod_data = Product.objects.all()
+        return render(request, 'posts/product_list.html', {'products':prod_data})
+
+def create_product(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            price = form.cleaned_data['price']
+            product = Product.objects.create(name=name, price=price)
+            return redirect('product_list') 
+    else:
+        form = ProductForm()
+    
+    return render(request, 'posts/create_product.html', {'form':form})
+
+
+def edit_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post.title = form.cleaned_data['title']
+            post.content = form.cleaned_data['content']
+            post.save()
+            return redirect('post_detail', post_id=post.id)
+    else:
+        form = PostForm(initial={
+            'title': post.title,
+            'content': post.content,
+            'author': post.author
+        })
+    return render(request, 'posts/post_edit.html', {'form': form, 'post': post})

@@ -2,6 +2,9 @@
 
 {% block content %}
   <div class="container">
+    
+    <a href="{% url 'create_post' %}" class="btn btn-primary mb-4">Create new post</a>
+
     <h1 class="text-center mb-4">Blog Posts</h1>
     <div class="row">
       {% for post in posts %}

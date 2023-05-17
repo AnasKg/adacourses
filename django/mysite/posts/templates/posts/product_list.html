@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Product List</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <h1>Product List</h1>
+  
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Date of Addition</th>
+    </tr>
+    {% for product in products %}
+    <tr>
+      <td>{{ product.name }}</td>
+      <td> {{ product.price }} </td>
+      <td> {{ product.created_at }} </td>
+    </tr>
+    {% endfor %}
+ 
+    <!-- Add more product rows here as needed -->
+  </table>
+</body>
+</html>
