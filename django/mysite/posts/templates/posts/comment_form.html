@@ -1,0 +1,16 @@
+<form method="POST" action="">
+  {% csrf_token %}
+
+  {{ form.as_p }}
+  {% comment %} <label for="content">Комментарий:</label>
+  <textarea id="content" name="content" required></textarea>
+  <br>
+  <label for="author">Автор:</label>
+  <select id="author" name="author" required>
+    {% for user in users %}
+      <option value="{{ user.id }}">{{ user.username }}</option>
+    {% endfor %}
+  </select> {% endcomment %}
+  <br>
+  <button type="submit">Сохранить комментарий</button>
+</form>

@@ -3,6 +3,7 @@ from django.http import Http404
 from .models import Post, Comment, Product
 from django.contrib.auth.models import User
 from .forms import MyForm, PostForm, ProductForm, CommentForm
+from django.views import View, generic
 
 # Create your views here.
 
@@ -15,6 +16,35 @@ def post_list(request):
     context = {'posts': posts}
     return render(request, 'posts/post_list.html', context=context)
 
+class PostListView(generic.ListView):
+    # model = Post
+    queryset = Post.objects.all().order_by('title')
+    context_object_name = 'posts'
+    template_name = 'posts/post_list.html'
+
+
+class PostDetailView(generic.DetailView):
+    queryset = Post.objects.all()
+    context_object_name = 'post'
+    template_name = 'posts/post_detail.html'
+    pk_url_kwarg = 'post_id'
+    
+
+
+
+# class PostView(View):
+
+#     def get(self, request):
+#         posts = Post.objects.all()
+#         context = {'posts': posts}
+#         return render(request, 'posts/post_list.html', context=context)
+    
+#     def post(self, request):
+#         form = PostForm(request.POST)
+#         if form.is_valid():
+#             post = form.save()
+#             return redirect('post_detail', post_id = post.id)
+
 
 def post_detail(request, post_id):
     post = get_object_or_404(Post, id=post_id)
@@ -22,13 +52,17 @@ def post_detail(request, post_id):
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
-            content = form.cleaned_data['content']
-            author = form.cleaned_data['author']
-            Comment.objects.create(
-                post=post,
-                content=content,
-                author=author
-            )
+            # content = form.cleaned_data['content']
+            # author = form.cleaned_data['author']
+            # Comment.objects.create(
+            #     post=post,
+            #     content=content,
+            #     author=author
+            # )
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.save()
+
             return redirect('post_detail', post_id=post_id)
     else:
         form = CommentForm()
@@ -71,10 +105,12 @@ def create_post(request):
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
-            title = form.cleaned_data['title']
-            content = form.cleaned_data['content']
-            author = form.cleaned_data['author']
-            post = Post.objects.create(title=title, content= content , author = author)
+            # title = form.cleaned_data['title']
+            # content = form.cleaned_data['content']
+            # author = form.cleaned_data['author']
+            # post = Post.objects.create(title=title, content= content , author = author)
+
+            post = form.save()
 
             return redirect('post_detail', post_id = post.id)
 
@@ -106,16 +142,45 @@ def create_product(request):
 def edit_post(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     if request.method == 'POST':
-        form = PostForm(request.POST)
+        # form = PostForm(request.POST)
+        # if form.is_valid():
+        #     post.title = form.cleaned_data['title']
+        #     post.content = form.cleaned_data['content']
+        #     post.save()
+
+        form = PostForm(request.POST, instance=post)
         if form.is_valid():
-            post.title = form.cleaned_data['title']
-            post.content = form.cleaned_data['content']
-            post.save()
+            form.save()
+
             return redirect('post_detail', post_id=post.id)
     else:
-        form = PostForm(initial={
-            'title': post.title,
-            'content': post.content,
-            'author': post.author
-        })
+        # form = PostForm(initial={
+        #     'title': post.title,
+        #     'content': post.content,
+        #     'author': post.author
+        # })
+        form = PostForm(instance=post)
+    
     return render(request, 'posts/post_edit.html', {'form': form, 'post': post})
+
+
+def edit_comment(request, post_id, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id)
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment.content = form.cleaned_data['content']
+            comment.author = form.cleaned_data['author']
+            comment.save()
+
+            return redirect('post_detail', post_id=post_id)
+    
+    else:
+        form = CommentForm(initial={
+            'author': comment.author,
+            'content': comment.content
+        })
+    
+    context = {'form': form, 'comment': comment}
+
+    return render(request, 'posts/edit_comment.html', context)

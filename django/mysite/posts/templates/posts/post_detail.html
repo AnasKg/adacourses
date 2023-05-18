@@ -27,6 +27,7 @@
         <div class="card-footer text-muted">
           <small>Created at: {{ comment.created_at|date:"F d, Y" }}</small>
         </div>
+        <a href="{% url 'edit_comment' post_id=comment.post.id comment_id=comment.id %}" class="btn btn-primary">Edit</a>
       </div>
     {% empty %}
       <p class="text-center">No comments yet.</p>
