@@ -1,0 +1,2 @@
+1) Прочитать про generic и View
+2) для Product сделать ProductListView и ProductDetailView
