@@ -1,0 +1,2 @@
+1) Сделать ListView, DetailView, CreateView, UpdateView, DeleteView для Product
+2) На сайте сделайте возможность удаления комментария(используйте generic)
